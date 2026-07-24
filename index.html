@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILBSL Leadership Meeting — Attendance</title>
+<style>
+  :root{
+    --navy:#0b2545;
+    --navy-2:#123a6b;
+    --gold:#c8952b;
+    --paper:#f7f5f0;
+    --ink:#1c2530;
+    --line:#d7d2c4;
+    --ok:#1e7a3d;
+    --err:#b3261e;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy),var(--navy-2));
+    color:#fff;
+    padding:22px 20px 26px;
+    text-align:center;
+  }
+  .topbar .eyebrow{
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .topbar h1{
+    margin:6px 0 4px;
+    font-size:20px;
+    font-weight:700;
+  }
+  .topbar p{
+    margin:0;
+    font-size:13px;
+    opacity:.85;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:18px 16px 60px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px;
+    margin-top:16px;
+  }
+  .card h2{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--navy-2);
+    margin:0 0 14px;
+    border-bottom:2px solid var(--gold);
+    padding-bottom:8px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin:14px 0 6px;
+    color:var(--navy);
+  }
+  label .req{color:var(--err);}
+  input[type=text], input[type=tel], select{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--line);
+    border-radius:7px;
+    font-size:15px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--navy-2);
+  }
+  .day-toggle{
+    display:flex;
+    gap:8px;
+    margin-top:6px;
+  }
+  .day-toggle button{
+    flex:1;
+    padding:10px 8px;
+    border:1.5px solid var(--line);
+    background:#fff;
+    border-radius:7px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--navy);
+    cursor:pointer;
+  }
+  .day-toggle button.active{
+    background:var(--navy);
+    color:#fff;
+    border-color:var(--navy);
+  }
+  .session-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:6px;
+  }
+  .session-list label.opt{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-weight:400;
+    font-size:14px;
+    margin:0;
+    padding:10px 12px;
+    border:1.5px solid var(--line);
+    border-radius:7px;
+    cursor:pointer;
+  }
+  .session-list input[type=radio]{
+    margin-top:3px;
+  }
+  .sig-wrap{
+    border:1.5px dashed var(--line);
+    border-radius:8px;
+    margin-top:8px;
+    background:#fcfcfa;
+    touch-action:none;
+  }
+  canvas#sigPad{
+    width:100%;
+    height:160px;
+    display:block;
+    cursor:crosshair;
+    touch-action:none;
+  }
+  .sig-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:6px;
+  }
+  .sig-hint{font-size:11px;color:#777;}
+  .clear-btn{
+    background:none;
+    border:none;
+    color:var(--navy-2);
+    font-size:12px;
+    font-weight:600;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  .submit-btn{
+    width:100%;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:14px;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.02em;
+    cursor:pointer;
+    margin-top:22px;
+  }
+  .submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+  .msg{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:8px;
+    font-size:13px;
+    display:none;
+  }
+  .msg.show{display:block;}
+  .msg.ok{background:#eaf6ee;color:var(--ok);border:1px solid #bfe3c9;}
+  .msg.err{background:#fbeceb;color:var(--err);border:1px solid #f2c6c3;}
+  .footer-note{
+    text-align:center;
+    font-size:11px;
+    color:#8a8a8a;
+    margin-top:22px;
+  }
+  .success-screen{
+    text-align:center;
+    padding:40px 16px;
+  }
+  .success-screen .check{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--ok);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px;font-size:28px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="eyebrow">Infinity Laghubitta Bittiya Sanstha Ltd.</div>
+  <h1>Leadership, Strategy &amp; Review Meeting</h1>
+  <p>July 31 – August 1, 2026</p>
+</div>
+
+<div class="wrap">
+  <form id="attendanceForm">
+
+    <div class="card">
+      <h2>Session</h2>
+      <label>Day <span class="req">*</span></label>
+      <div class="day-toggle" id="dayToggle">
+        <button type="button" data-day="Day 1" class="active">Day 1 — Jul 31</button>
+        <button type="button" data-day="Day 2">Day 2 — Aug 1</button>
+      </div>
+
+      <label style="margin-top:16px;">Check-in point <span class="req">*</span></label>
+      <div class="session-list" id="sessionList"></div>
+    </div>
+
+    <div class="card">
+      <h2>Participant Details</h2>
+      <label>Full Name <span class="req">*</span></label>
+      <input type="text" id="fullName" required placeholder="e.g. Subash Sharma">
+
+      <label>Branch / Department <span class="req">*</span></label>
+      <input type="text" id="branch" required placeholder="e.g. Kalanki Branch / IT Department">
+
+      <label>Designation <span class="req">*</span></label>
+      <input type="text" id="designation" required placeholder="e.g. Branch Manager">
+
+      <label>Employee ID</label>
+      <input type="text" id="empId" placeholder="Optional">
+
+      <label>Mobile Number <span class="req">*</span></label>
+      <input type="tel" id="mobile" required placeholder="98XXXXXXXX">
+    </div>
+
+    <div class="card">
+      <h2>Signature</h2>
+      <div class="sig-wrap">
+        <canvas id="sigPad"></canvas>
+      </div>
+      <div class="sig-row">
+        <span class="sig-hint">Sign with your finger or mouse</span>
+        <button type="button" class="clear-btn" id="clearSig">Clear</button>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Submit Attendance</button>
+    <div class="msg" id="msgBox"></div>
+    <div class="footer-note">IT Department · Infinity Laghubitta · Attendance is recorded per session</div>
+  </form>
+
+  <div class="success-screen" id="successScreen" style="display:none;">
+    <div class="check">✓</div>
+    <h2 style="color:var(--navy);">Attendance Recorded</h2>
+    <p id="successDetail" style="color:#555;font-size:14px;"></p>
+    <button class="submit-btn" id="againBtn" style="max-width:280px;margin:20px auto 0;">Mark Another Entry</button>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+const SESSIONS = {
+  "Day 1": [
+    "Opening Ceremony & Welcome Remarks",
+    "CEO Talk: Vision, Leadership & Business Direction",
+    "Business Performance Review & Strategic Priorities",
+    "Knowledge Sharing: Credit Quality & Best Practices",
+    "Recovery Issues & NPL Management",
+    "Audit Compliance & Internal Control Updates",
+    "Operational Risk, Process Improvement & Digital Support",
+    "HR Management, Performance Culture & Development",
+    "Interactive Forum with CEO & Management",
+    "Group Discussion: Branch Challenges & Opportunities",
+    "Group Presentation & Management Feedback",
+    "NPL Clinic: Case Studies & Recovery Strategies",
+    "Banking Offences & Punishment Act Awareness",
+    "Programme Feedback"
+  ],
+  "Day 2": [
+    "NPL Review: Branches 20.01% and above",
+    "NPL Review: Branches 15.01%–20.00%",
+    "NPL Review: Branches 10.01%–15.00%",
+    "NPL Review: Branches 5.01%–10.00%",
+    "Best Practice Sharing: Green Branches (0%–5.00%)",
+    "Action Planning & Branch Commitments",
+    "Opinion, Suggestions & Open Discussion",
+    "CEO Closing Remarks",
+    "Closing Ceremony & Certificate Distribution"
+  ]
+};
+
+let currentDay = "Day 1";
+const dayToggle = document.getElementById("dayToggle");
+const sessionList = document.getElementById("sessionList");
+
+function renderSessions(day){
+  sessionList.innerHTML = "";
+  SESSIONS[day].forEach((s, i) => {
+    const id = "sess_" + i;
+    const wrap = document.createElement("label");
+    wrap.className = "opt";
+    wrap.innerHTML = `<input type="radio" name="session" value="${s}" id="${id}" ${i===0?'required':''}> <span>${s}</span>`;
+    sessionList.appendChild(wrap);
+  });
+}
+renderSessions(currentDay);
+
+dayToggle.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  [...dayToggle.children].forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  currentDay = btn.dataset.day;
+  renderSessions(currentDay);
+});
+
+const canvas = document.getElementById("sigPad");
+const ctx = canvas.getContext("2d");
+let drawing = false, hasSig = false;
+
+function resizeCanvas(){
+  const ratio = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * ratio;
+  canvas.height = 160 * ratio;
+  ctx.scale(ratio, ratio);
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#0b2545";
+}
+resizeCanvas();
+window.addEventListener("resize", () => {
+  const data = hasSig ? canvas.toDataURL() : null;
+  resizeCanvas();
+  if(data){
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img,0,0,canvas.width/(window.devicePixelRatio||1),160);
+    img.src = data;
+  }
+});
+
+function pos(e){
+  const rect = canvas.getBoundingClientRect();
+  const t = e.touches ? e.touches[0] : e;
+  return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+}
+function start(e){ drawing = true; hasSig = true; const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); e.preventDefault(); }
+function move(e){ if(!drawing) return; const p = pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); }
+function end(){ drawing = false; }
+
+canvas.addEventListener("mousedown", start);
+canvas.addEventListener("mousemove", move);
+window.addEventListener("mouseup", end);
+canvas.addEventListener("touchstart", start, {passive:false});
+canvas.addEventListener("touchmove", move, {passive:false});
+canvas.addEventListener("touchend", end);
+
+document.getElementById("clearSig").addEventListener("click", () => {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  hasSig = false;
+});
+
+const form = document.getElementById("attendanceForm");
+const msgBox = document.getElementById("msgBox");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  msgBox.className = "msg";
+
+  const session = form.querySelector('input[name="session"]:checked');
+  if(!session){
+    showMsg("Please select a check-in session.", "err");
+    return;
+  }
+  if(!hasSig){
+    showMsg("Please provide your signature before submitting.", "err");
+    return;
+  }
+
+  const payload = {
+    day: currentDay,
+    session: session.value,
+    fullName: document.getElementById("fullName").value.trim(),
+    branch: document.getElementById("branch").value.trim(),
+    designation: document.getElementById("designation").value.trim(),
+    empId: document.getElementById("empId").value.trim(),
+    mobile: document.getElementById("mobile").value.trim(),
+    signature: canvas.toDataURL("image/png"),
+    timestamp: new Date().toISOString()
+  };
+
+  if(SCRIPT_URL.includes("PASTE_YOUR")){
+    showMsg("Setup incomplete: paste your Google Apps Script Web App URL into SCRIPT_URL in index.html.", "err");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  try{
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    });
+    document.getElementById("successDetail").textContent =
+      `${payload.fullName} — ${payload.day}, ${payload.session}`;
+    form.style.display = "none";
+    document.getElementById("successScreen").style.display = "block";
+  }catch(err){
+    showMsg("Network error. Please check your connection and try again.", "err");
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Attendance";
+  }
+});
+
+document.getElementById("againBtn").addEventListener("click", () => {
+  form.reset();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  hasSig = false;
+  document.getElementById("successScreen").style.display = "none";
+  form.style.display = "block";
+});
+
+function showMsg(text, type){
+  msgBox.textContent = text;
+  msgBox.className = "msg show " + type;
+}
+</script>
+</body>
+</html>
