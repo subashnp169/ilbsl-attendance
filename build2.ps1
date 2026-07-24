@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+$html = @"
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -623,3 +624,5 @@ reportObserver.observe(document.getElementById("sec-report"));
 </script>
 </body>
 </html>
+"@
+Set-Content -Path "C:\Users\Lenovo\Documents\Default Project\ilbsl-attendance\index.html" -Value $html -Encoding UTF8 -NoNewline
